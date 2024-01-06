@@ -1,1 +1,1 @@
-"# DigitsOfPi" 
+<h1 align="center">Digits of Pi Game</h1>
