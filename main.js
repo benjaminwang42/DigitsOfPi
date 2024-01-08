@@ -14,8 +14,9 @@ function checkPi() {
             document.getElementById("result").innerHTML = `Correct! Keep going.`;
         }
     } else {
-        document.getElementById("result").innerHTML = `Wrong digit. Game over. The correct digit was ${piDigits[currentIndex]}. You got a score of ${userInput.length -1}!`;
+        document.getElementById("result").innerHTML = `Wrong digit. Game over. You got a score of ${userInput.length -1}!`;
         checkLeaderboard();
+        document.getElementById("userInput").removeEventListener("input", checkPi);
         currentIndex = 0; 
     }
 }
@@ -24,18 +25,11 @@ function restartGame() {
     currentIndex = 0;
     document.getElementById("userInput").value = "";
     document.getElementById("result").innerHTML = "";
+    document.getElementById("userInput").addEventListener("input", checkPi);
 }
 
-// function checkLeaderboard() {
-//     const userInput = document.getElementById("userInput").value;
-//     const rank1Score = parseInt(document.getElementById("rank1").textContent);
-
-//     if ((userInput.length - 1) > rank1Score) {
-//         document.getElementById("rank1").textContent = userInput.length - 1;
-//     }
-// }
-
 document.addEventListener("DOMContentLoaded", function () {
+    //resetLeaderboard();
     loadScores();
 });
 
@@ -52,10 +46,75 @@ function loadScores() {
 function checkLeaderboard() {
     const userInput = document.getElementById("userInput").value;
     const rank1Score = parseInt(document.getElementById("rank1").textContent);
+    const rank2Score = parseInt(document.getElementById("rank2").textContent);
+    const rank3Score = parseInt(document.getElementById("rank3").textContent);
+    const rank4Score = parseInt(document.getElementById("rank4").textContent);
+    const rank5Score = parseInt(document.getElementById("rank5").textContent);
 
     if ((userInput.length - 1) > rank1Score) {
+        for (let i = 5; i >= 2; i--){
+            document.getElementById(`rank${i}`).textContent = document.getElementById(`rank${i-1}`).textContent
+        }
+        
         document.getElementById("rank1").textContent = userInput.length - 1;
 
         localStorage.setItem("rank1", userInput.length - 1);
+        for (let i = 5; i>=2;i--){
+            localStorage.setItem(`rank${i}`, document.getElementById(`rank${i}`).textContent);
+        }
+        
+    }
+
+    else if ((userInput.length - 1) > rank2Score) {
+        for (let i = 5; i >= 3; i--){
+            document.getElementById(`rank${i}`).textContent = document.getElementById(`rank${i-1}`).textContent
+        }
+        
+        document.getElementById("rank2").textContent = userInput.length - 1;
+
+        localStorage.setItem("rank2", userInput.length - 1);
+        for (let i = 5; i>=3;i--){
+            localStorage.setItem(`rank${i}`, document.getElementById(`rank${i}`).textContent);
+        }
+        
+    }
+
+    else if ((userInput.length - 1) > rank3Score) {
+        for (let i = 5; i >= 4; i--){
+            document.getElementById(`rank${i}`).textContent = document.getElementById(`rank${i-1}`).textContent
+        }
+        
+        document.getElementById("rank3").textContent = userInput.length - 1;
+
+        localStorage.setItem("rank3", userInput.length - 1);
+        for (let i = 5; i>=4;i--){
+            localStorage.setItem(`rank${i}`, document.getElementById(`rank${i}`).textContent);
+        }
+    }
+    
+    else if ((userInput.length - 1) > rank4Score) {
+        for (let i = 5; i >= 5; i--){
+            document.getElementById(`rank${i}`).textContent = document.getElementById(`rank${i-1}`).textContent
+        }
+        
+        document.getElementById("rank4").textContent = userInput.length - 1;
+
+        localStorage.setItem("rank4", userInput.length - 1);
+        for (let i = 5; i>=5;i--){
+            localStorage.setItem(`rank${i}`, document.getElementById(`rank${i}`).textContent);
+        }
+    }
+
+    else if ((userInput.length - 1) > rank2Score) {
+        document.getElementById("rank5").textContent = userInput.length - 1;
+
+        localStorage.setItem("rank5", userInput.length - 1);
+    }
+
+}   
+
+function resetLeaderboard() {
+    for (let i = 1; i <= 5; i++) {
+        localStorage.setItem(`rank${i}`) = "";
     }
 }
