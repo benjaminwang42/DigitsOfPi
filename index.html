@@ -8,11 +8,31 @@
 </head>
 <body>
     <div id="piGame">
-        <h1>See how many digits of π you can type!</h1>
-        <input type="text" id="userInput" placeholder="Type digits of Pi...">
-        <button onclick="restartGame()">Restart</button>
-        <p id="result"></p>
+        <div class="container">
+            <div class="game">
+                <h1>See how many digits of π you can type!</h1>
+                <div>3.<input type="text" id="userInput" placeholder="Type digits of pi here"></div>
+                <button onclick="restartGame()">Restart</button>
+                <p id="result"></p>
+            </div>
+        </div>
     </div>
+
+    <div id="leaderboard-area">
+        <div class="container">
+            <ul id="leaderboard">
+                <h3 class="header"> Leaderboard:</h3>
+                <li >1. <span id="rank1">0</span> </li>
+                <li >2. <span id="rank2">0</span> </li>
+                <li >3. <span id="rank3">0</span> </li>
+                <li >4. <span id="rank4">0</span> </li>
+                <li >5. <span id="rank5">0</span> </li>
+            </ul>
+        </div>
+    </div>
+
+
+
     <script src="main.js"></script>
 </body>
 </html>

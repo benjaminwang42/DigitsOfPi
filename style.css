@@ -26,3 +26,12 @@ button {
     font-weight: bold;
     color: green;
 }
+
+#leaderboard {
+    list-style:none;
+    display:flex;
+    flex-direction:column;
+    margin-right:auto;
+    margin-left:auto;
+
+}

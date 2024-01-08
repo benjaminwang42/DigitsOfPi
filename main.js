@@ -9,13 +9,13 @@ function checkPi() {
     if (userInput === piDigits.slice(0, userInput.length)) {
         if (userInput.length === piDigits.length) {
             document.getElementById("result").innerHTML = "Congratulations! You typed all the digits correctly!";
-            currentIndex = 0; 
         } else {
             currentIndex = userInput.length;
             document.getElementById("result").innerHTML = `Correct! Keep going.`;
         }
     } else {
-        document.getElementById("result").innerHTML = `Oops! Wrong digit. Game over. Correct digit was ${piDigits[currentIndex]}`;
+        document.getElementById("result").innerHTML = `Wrong digit. Game over. The correct digit was ${piDigits[currentIndex]}. You got a score of ${userInput.length -1}!`;
+        checkLeaderboard();
         currentIndex = 0; 
     }
 }
@@ -24,4 +24,38 @@ function restartGame() {
     currentIndex = 0;
     document.getElementById("userInput").value = "";
     document.getElementById("result").innerHTML = "";
+}
+
+// function checkLeaderboard() {
+//     const userInput = document.getElementById("userInput").value;
+//     const rank1Score = parseInt(document.getElementById("rank1").textContent);
+
+//     if ((userInput.length - 1) > rank1Score) {
+//         document.getElementById("rank1").textContent = userInput.length - 1;
+//     }
+// }
+
+document.addEventListener("DOMContentLoaded", function () {
+    loadScores();
+});
+
+function loadScores() {
+    for (let i = 1; i <= 5; i++) {
+        const rankElement = document.getElementById(`rank${i}`);
+        const storedScore = localStorage.getItem(`rank${i}`);
+        if (storedScore !== null) {
+            rankElement.textContent = storedScore;
+        }
+    }
+}
+
+function checkLeaderboard() {
+    const userInput = document.getElementById("userInput").value;
+    const rank1Score = parseInt(document.getElementById("rank1").textContent);
+
+    if ((userInput.length - 1) > rank1Score) {
+        document.getElementById("rank1").textContent = userInput.length - 1;
+
+        localStorage.setItem("rank1", userInput.length - 1);
+    }
 }
